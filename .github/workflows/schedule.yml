@@ -1,0 +1,24 @@
+name: Daily Trading Analysis
+
+on:
+  schedule:
+    - cron: '0 8 * * *'
+
+jobs:
+  run-analysis:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      
+      - name: Install dependencies
+        run: |
+          pip install pandas requests
+      
+      - name: Run analysis
+        run: python analyze.py
